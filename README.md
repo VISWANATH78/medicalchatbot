@@ -65,12 +65,12 @@ pip install streamlit transformers googletrans==4.0.0-rc1 langdetect speechrecog
 
 1. Clone this repository:
    ```bash
-   git clone <your-repository-url>
+   git clone https://github.com/VISWANATH78/medicalchatbot.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd <project-directory>
+   cd medicalchatbot
    ```
 
 3. Run the Streamlit app:

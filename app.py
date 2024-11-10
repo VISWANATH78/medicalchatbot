@@ -194,6 +194,15 @@ def main():
                 final_response = translate_back_to_original(generated_response, detected_lang)
         else:
             st.warning("Please enter or speak a question.")
+    
+    # Footer with your name and email
+    st.markdown("<hr>", unsafe_allow_html=True)
+    st.markdown("""
+        <p style="text-align: center;">
+            All rights reserved. <br>
+            Viswanath V S | vichu110602@gmail.com
+        </p>
+    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()

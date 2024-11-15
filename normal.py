@@ -136,15 +136,24 @@ tokenizer_gpt2 = GPT2Tokenizer.from_pretrained("gpt2")
 model_gpt2 = GPT2LMHeadModel.from_pretrained("gpt2")
 
 # Function to generate response using GPT-2
+# Function to generate response using GPT-2
 def generate_gpt2_response(prompt):
-    inputs = tokenizer_gpt2.encode(prompt, return_tensors="pt")
-    outputs = model_gpt2.generate(inputs, max_length=100, num_return_sequences=1, no_repeat_ngram_size=2, temperature=0.7)
+    # Add prompt instructing the model to act as a doctor
+    doctor_prompt = "You are a doctor. Answer only medical-related questions. If the question is not related to medicine, say: 'I am a doctor, I don't know.'"
+    full_prompt = doctor_prompt + "\n\n" + prompt
+
+    # Generate response from GPT-2
+    inputs = tokenizer_gpt2.encode(full_prompt, return_tensors="pt")
+    outputs = model_gpt2.generate(inputs, max_length=500, num_return_sequences=1, no_repeat_ngram_size=2, temperature=0.7)
     generated_text = tokenizer_gpt2.decode(outputs[0], skip_special_tokens=True)
-    return generated_text
+    
+    # Remove the "doctor_prompt" part from the response
+    response = generated_text.replace(doctor_prompt, "").strip()
+    return response
 
 # Streamlit Interface
 def main():
-    st.title("Multilingual Chatbot")
+    st.title("Multilingual Medical Chatbot")
 
     # Text input from the user
     user_input = st.text_area("Ask your question:")
